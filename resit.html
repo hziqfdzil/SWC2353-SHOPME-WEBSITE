@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #d8b82b;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #4CAF50;
+            font-size: 2rem;
+        }
+        .order-details {
+            margin-top: 20px;
+        }
+        .order-details div {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Order Receipt</h1>
+        </div>
+        <div class="order-details" id="order-details"></div>
+        <div class="total" id="total-price"></div>
+        <button class="btn btn-success" onclick="printReceipt()">Print Receipt</button>
+    </div>
+
+    <script>
+        // Function to display order details
+        function displayReceipt() {
+            const orderDetails = JSON.parse(localStorage.getItem('orderDetails')) || [];
+            const orderDetailsContainer = document.getElementById('order-details');
+            const totalPriceContainer = document.getElementById('total-price');
+            
+            let totalPrice = 0;
+            orderDetailsContainer.innerHTML = '';
+
+            orderDetails.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                totalPrice += itemTotal;
+                orderDetailsContainer.innerHTML += `
+                    <div>
+                        <img src="${item.image}" alt="${item.name}" width="50" />
+                        <span>${item.name}</span> - RM ${item.price} x ${item.quantity} = RM ${itemTotal.toFixed(2)}
+                    </div>
+                `;
+            });
+
+            totalPriceContainer.innerHTML = `<h3>Total Price: RM ${totalPrice.toFixed(2)}</h3>`;
+        }
+
+        // Function to print the receipt
+        function printReceipt() {
+            window.print();
+        }
+
+        // Call the function to display the receipt details
+        displayReceipt();
+    </script>
+</body>
+</html>

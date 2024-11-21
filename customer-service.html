@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopee Customer Service</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* General Body Style */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #d8b82b;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container Styles */
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #4CAF50;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .header p {
+            color: #777;
+            font-size: 1rem;
+        }
+
+        /* Form Styles */
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            background-color: #f8f9fa;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: #4CAF50;
+            background-color: #ffffff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            height: 150px;
+        }
+
+        /* Submit Button */
+        .btn-primary {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #45a049;
+        }
+
+        /* Footer Section */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .footer a {
+            text-decoration: none;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>ShopMe Customer Service</h1>
+            <p>We are here to assist you with any issues you may have. Please fill out the form below, and our team will get back to you shortly.</p>
+        </div>
+
+        <form action="submit-query.php" method="POST" id="customer-service-form">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your full name" />
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email address" />
+            </div>
+
+            <div class="form-group">
+                <label for="inquiry-type">Inquiry Type</label>
+                <select id="inquiry-type" name="inquiry-type" required>
+                    <option value="">Select an inquiry type</option>
+                    <option value="Order Issues">Order Issues</option>
+                    <option value="Product Information">Product Information</option>
+                    <option value="Refund/Return">Refund/Return</option>
+                    <option value="Shipping Issues">Shipping Issues</option>
+                    <option value="Payment Issues">Payment Issues</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required placeholder="Describe your issue or inquiry here"></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Shopee - All Rights Reserved | <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></p>
+    </div>
+
+    <script>
+        // Simple form validation before submission
+        document.getElementById('customer-service-form').addEventListener('submit', function(e) {
+            let name = document.getElementById('name').value;
+            let email = document.getElementById('email').value;
+            let message = document.getElementById('message').value;
+
+            if (!name || !email || !message) {
+                alert("Please fill in all the required fields.");
+                e.preventDefault(); // Stop form submission
+            } else {
+                alert("Your inquiry has been submitted. We will contact you soon.");
+            }
+        });
+    </script>
+
+</body>
+</html>

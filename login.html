@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Fashion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <form id="login-form" method="POST">
+        <h3>Login Here</h3>
+        <div id="notification" class="notification"></div>
+
+        <label for="username">Username or Email</label>
+        <input type="text" placeholder="Username or Email" id="username" name="username" required>
+
+        <label for="password">Password</label>
+        <input type="password" placeholder="Password" id="password" name="password" required>
+
+        <button type="submit">Log In</button>
+        <div class="social">
+            <div class="go"><i class="fab fa-google"></i> Google</div>
+            <div class="fb"><i class="fab fa-facebook"></i> Facebook</div>
+        </div>
+    </form>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const response = await fetch('login_process.php', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            const notification = document.getElementById('notification');
+            if (result.success) {
+                notification.classList.add('success');
+                notification.textContent = 'Login successful!';
+                setTimeout(() => {
+                    window.location.href = 'index.php';
+                }, 2000);
+            } else {
+                notification.classList.add('error');
+                notification.textContent = result.message || 'Invalid username or password.';
+            }
+
+            notification.style.display = 'block';
+        });
+    </script>
+</body>
+
+</html>
